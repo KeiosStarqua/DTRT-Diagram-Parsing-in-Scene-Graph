@@ -121,6 +121,8 @@ def get_args_parser():
 
     parser.add_argument('--output_dir', default='',
                         help='path where to save, empty for no saving')
+    parser.add_argument('--save_every_epoch', action='store_true',
+                        help='save a separate checkpoint{epoch}.pth after every epoch instead of only before LR drop or every 5 epochs')
     parser.add_argument('--device', default='cuda',
                         help='device to use for training / testing')
     parser.add_argument('--seed', default=42, type=int)
@@ -245,8 +247,8 @@ def main(args):
         lr_scheduler.step()
         if args.output_dir:
             checkpoint_paths = [output_dir / 'checkpoint.pth'] # anti-crash
-            # extra checkpoint before LR drop and every 5 epochs
-            if (epoch + 1) % args.lr_drop == 0 or (epoch + 1) % 5 == 0:
+            # extra checkpoint before LR drop and every 5 epochs (or every epoch if --save_every_epoch)
+            if args.save_every_epoch or (epoch + 1) % args.lr_drop == 0 or (epoch + 1) % 5 == 0:
                 checkpoint_paths.append(output_dir / f'checkpoint{epoch:04}.pth')
             for checkpoint_path in checkpoint_paths:
                 utils.save_on_master({

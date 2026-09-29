@@ -1,3 +1,37 @@
-
+# IDE
 .idea/
+.vscode/
+
+# Checkpoints & datasets (large artifacts)
 ckpt/
+PID2Graph/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C/Cython build artifacts
+*.so
+*.o
+lib/fpn/box_intersections_cpu/build/
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Logs & outputs
+*.log
