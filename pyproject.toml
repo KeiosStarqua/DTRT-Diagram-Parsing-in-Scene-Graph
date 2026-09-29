@@ -2,4 +2,26 @@
 name = "dtrt-diagram-parsing-in-scene-graph"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    # Core deep learning stack (Swin backbones need a recent torchvision)
+    "torch>=2.2",
+    "torchvision>=0.17",
+    # Numerics / optimization
+    "numpy>=1.26",
+    "scipy>=1.11",
+    # COCO-style detection datasets and evaluation
+    "pycocotools>=2.0.7",
+    # Image IO / visualization
+    "pillow>=10.0",
+    "matplotlib>=3.8",
+    # Misc utilities used by the Open Images evaluation code
+    "six>=1.16",
+    "tqdm>=4.66",
+]
+
+# Optional: only needed to compile the lib/fpn box-intersection C extension
+# (Visual Genome / Open Images evaluation). Install with: uv sync --extra fpn
+[project.optional-dependencies]
+fpn = [
+    "cython>=3.0",
+]
